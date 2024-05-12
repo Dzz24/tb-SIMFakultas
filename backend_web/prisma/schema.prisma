@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model mahasiswa {
+  nama String  @id @db.VarChar(100)
+  nim  String? @db.VarChar(100)
+}
+
+model tabel_user {
+  username String  @id @db.VarChar(100)
+  password String? @db.VarChar(100)
+}
