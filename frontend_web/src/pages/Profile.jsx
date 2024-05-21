@@ -1,11 +1,9 @@
 import Navbar from "../components/Navbar";
-function Beranda (){
+function Profile (){
     return (
-        <>
-        <Navbar/>
         <div>
+            <Navbar/>
         </div>
-        </>
     )
 }
-export default Beranda;
+export default Profile;
