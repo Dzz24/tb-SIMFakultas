@@ -7,12 +7,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model mahasiswa {
-  nama String  @id @db.VarChar(100)
-  nim  String? @db.VarChar(100)
+model Token {
+  id        String   @id @default(cuid())
+  token     String   @unique @db.VarChar(255)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model tabel_user {
-  username String  @id @db.VarChar(100)
-  password String? @db.VarChar(100)
+model User {
+  id        String   @id @default(uuid())
+  nama      String
+  email     String   @unique @db.VarChar(255)
+  password  String
+  alamat    String?
+  noHp      String?
+  role      Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tokens    Token[]
+}
+
+enum Role {
+  akuntan
+  hr
+  eksekutif
+  karyawan
 }
