@@ -22,4 +22,5 @@ catch (error) {
     )
 }
 }
+
 module.exports = validateToken;
