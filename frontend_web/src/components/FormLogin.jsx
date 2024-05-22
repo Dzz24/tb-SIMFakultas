@@ -1,26 +1,27 @@
+import gambar3 from '../assets/logoipsum-249.svg';
 function FormLogin (){
     return (
-        <div className="flex justify-center mt-24">
+        <div className="">
+            <div className='flex justify-between'>
+                <div className='flex gap-4 mt-8 ml-8'>
+                    <img src={gambar3} className='w-12 h-12' alt="" />
+                    <p className='font-bold text-3xl m-1'>SIMADA</p>
+                </div>
+                <div className='mt-8 mr-8 space-y-6 bg'>
+                    <form action="">
+                    <h1 className='font-bold text-5xl'>Welcome to SIMADA</h1>
+                    <p className='text-xl text'>login with ur account</p>
+                    <p className='text-xl '>Nama</p>
+                    <input type="text" className=" bg-transparent text-opacity-60 ring-opacity-20 block rounded-md border-0 py-3 pl-7 pr-44  text-white ring-1 ring-inset ring-black-300  sm:text-sm sm:leading-6"/>
+                    <p className='text-xl'>Role</p>
+                    <input type="password" className=" bg-transparent text-opacity-60 ring-opacity-20 block rounded-md border-0 py-3 pl-7 pr-44  text-white ring-1 ring-inset ring-black-300  sm:text-sm sm:leading-6"/>
+                    <p className='text-xl'>Password</p>
+                    <input type="text" className=" bg-transparent text-opacity-60 ring-opacity-20 block rounded-md border-0 py-3 pl-7 pr-44  text-white ring-1 ring-inset ring-black-300  sm:text-sm sm:leading-6"/>
+                    </form>
+                </div>
+            </div>
             <div>
 
-            </div>
-            <div className="px-72 py-36 bg-indigo-50 rounded-xl">
-                <h1 className=" text-3xl font-bold text-center">SIMADA</h1>
-                <div className="relative shadow-sm">
-                        <div className="mt-12 ">
-                            <label htmlFor="Username">Username</label>
-                            <input type="text" className=" mt-2 bg-transparent text-opacity-60 ring-opacity-20 block rounded-md border border-indigo-400 py-3 pl-7 pr-24  "/>
-                        </div>
-                        <div className="mt-6 ">
-                            <label htmlFor="Password">Password</label>
-                            <input type="text" className=" mt-2 bg-transparent text-opacity-60 ring-opacity-20 block rounded-md border border-indigo-400 py-3 pl-7 pr-24  "/>
-                        </div>
-                        <div className="flex justify-center">
-                        <div className=" mt-12 px-32 py-3 bg-indigo-400 rounded-lg text-center ">
-                            <p className=" text-white font-bold ">LOGIN</p>
-                        </div>
-                        </div>
-                </div>
             </div>
         </div>
     )
