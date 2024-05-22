@@ -7,12 +7,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model mahasiswa {
-  nama String  @id @db.VarChar(100)
-  nim  String? @db.VarChar(100)
+model userrss {
+  id       String @id @default(cuid())
+  email    String @unique @db.VarChar(100)
+  username String @unique @db.VarChar(100)
+  password String @db.VarChar(100)
+  role     String @db.VarChar(100)
 }
 
-model tabel_user {
-  username String  @id @db.VarChar(100)
-  password String? @db.VarChar(100)
+model token {
+  id_token         String   @id @default(cuid())
+  token            String   @db.Text
+  createdAt        DateTime @default(now())
+  expiredAt        DateTime 
 }
