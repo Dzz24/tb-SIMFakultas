@@ -1,3 +1,20 @@
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require ('cors')
+const createError = require('http-errors');
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth'); // Import router auth
+
+const app = express();
+const port = 4000;
+
+// Import Prisma Client
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -14,6 +31,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,6 +40,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter); // Gunakan router auth
+
+// Middleware untuk menyediakan Prisma Client ke setiap rute
+app.use((req, res, next) => {
+  req.prisma = prisma;
+  next();
+});
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
@@ -38,6 +63,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.listen(port, () => {
+  console.log("Server running in port " + port);
 });
 
 module.exports = app;
