@@ -18,7 +18,7 @@ function FormLogin() {
       console.log('Login successful:', response);
       const userData = response.data.data;
       localStorage.setItem('token', response.data.token);
-      localStorage.setItem("user_data", JSON.stringify(userData));
+    //   localStorage.setItem("user_data", JSON.stringify(userData));
       setError(''); // Clear any previous errors
       // navigate('/'); // Redirect to dashboard after successful login
       window.location.href = "/";
