@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import { useNavigate, Link } from 'react-router-dom';
 
 function FormLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,57 +20,65 @@ function FormLogin() {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem("user_data", JSON.stringify(userData));
       setError(''); // Clear any previous errors
-      // navigate('/'); // Redirect to dashboard after successful login
-      window.location.href = "/";
+      navigate('/'); // Redirect to dashboard after successful login
     } catch (error) {
       console.error('Login failed:', error.response ? error.response.data : error.message);
-      setError('Login failed. Please check your credentials.');
+      setError(error.response?.data?.message || 'Login failed. Please check your credentials.');
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-b from-gray-800 to-gray-900">
-      <div className="bg-white rounded-xl shadow-lg p-8 flex">
-        <div className="w-1/2 p-6">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">SIMADA</h1>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
+    <div className="flex flex-col justify-center bg-white">
+      <div className="flex flex-col justify-center w-full bg-slate-900 max-md:max-w-full">
+        <div className="pr-20 pb-14 pt-10 w-full backdrop-blur-[87.5px] bg-slate-900 bg-opacity-90 max-md:pr-5 max-md:max-w-full">
+          <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+            <div className="flex flex-col ml-5 w-full max-md:ml-0">
+              <div className="flex flex-col grow max-md:max-w-full">
+                <div className="flex z-10 flex-col self-end p-20 mt-0 max-w-full text-xl text-orange-400 bg-sky-50 w-[720px] max-md:px-5 max-md:mt-0">
+                  <div className="mx-4 mt-16 text-4xl font-bold text-indigo-400 max-md:mt-10 max-md:mr-2.5 max-md:max-w-full">
+                    Welcome to SIMADA!
+                  </div>
+                  <div className="mx-4 mt-6 max-md:mr-2.5 max-md:max-w-full">
+                    Login with your account
+                  </div>
+                  <form onSubmit={handleSubmit} className="mx-4">
+                    <div className="mt-14 max-md:mt-10 max-md:mr-2.5 max-md:max-w-full">
+                      Email
+                    </div>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="shrink-0 mt-5 max-w-full rounded-xl border border-indigo-400 border-solid h-[60px] w-[530px] max-md:mr-2.5 px-4"
+                    />
+                    <div className="mt-9 max-md:mr-2.5 max-md:max-w-full">
+                      Password
+                    </div>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="shrink-0 mt-5 max-w-full rounded-xl border border-indigo-400 border-solid h-[60px] w-[530px] max-md:mr-2.5 px-4"
+                    />
+                    {error && <div className="text-red-500 mt-4">{error}</div>}
+                    <button
+                      type="submit"
+                      className="justify-center items-center px-6 py-3 mt-12 ml-4 max-w-full text-lg font-bold text-white whitespace-nowrap bg-indigo-400 rounded-lg w-[150px] max-md:px-5 max-md:mt-10 max-md:ml-2.5"
+                    >
+                      Login
+                    </button>
+                  </form>
+                  <div className="mx-4 mt-9 mb-1 underline max-md:mr-2.5 max-md:max-w-full">
+                    Ingin Izin Cuti? <Link to="/izin-cuti" className="underline">Click Here</Link>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="mb-6">
-              <label htmlFor="password" className="block text-gray-700">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            {error && <div className="text-red-500 mb-4">{error}</div>}
-            <button
-              type="submit"
-              className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-700"
-            >
-              LOGIN
-            </button>
-          </form>
-        </div>
-        <div className="w-1/2 p-6 flex items-center justify-center bg-indigo-100 rounded-r-xl">
-          <img
-            src=""
-            alt="..."
-            className="w-40 h-40"
-          />
+          </div>
         </div>
       </div>
     </div>
