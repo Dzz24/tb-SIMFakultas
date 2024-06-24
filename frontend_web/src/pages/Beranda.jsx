@@ -1,4 +1,4 @@
-"use client";
+
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { getUserData } from "../utils/utils";
@@ -21,9 +21,6 @@ function Beranda (){
     return (
         <>
         <Navbar/>
-        <div>
-            <h1>BISMILLAH PWEB A</h1>
-        </div>
         </>
     )
 }
